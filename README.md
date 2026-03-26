@@ -1,2 +1,56 @@
-# AIDS_Sem6_RL_Experiment03_MDP_Yash
-A Markov Decision Process (MDP) is a mathematical framework for modeling decision-making where outcomes are partly random and partly under an agent's control.
+# AIDS_Sem6_RL_Experiment02_KArmedBandit
+
+## Aim
+To implement and compare different Multi-Armed Bandit algorithms (Random Selection, ε-greedy, UCB) for ad click optimization problem.
+
+## Problem Statement
+An advertising company runs 10 different ads on a webpage. Given click data (1=clicked, 0=not clicked), implement K-armed bandit algorithms to maximize total reward (clicks).
+
+## Brief Theory
+**Multi-Armed Bandit Problem**: Choose actions (arms) to maximize cumulative reward. Balance **exploration** (try new arms) vs **exploitation** (choose best known arm).
+
+- **Random**: Pure exploration, select randomly
+- **ε-greedy**: ε% random (explore), (1-ε)% best so far (exploit)
+- **UCB**: Optimistic upper bound: Q + √(2ln(t)/N)
+
+## Implementation Explanation
+1. Load `Advertising.csv` (10000 users × 10 ads)
+2. **Random**: Select uniformly random ad each time
+3. **ε-greedy**: ε=0.1 probability random, else argmax(Q)
+4. **UCB**: Select arm maximizing Q(a) + √(2ln(N_total)/N(a))
+5. Track selections, rewards, update Q-values
+6. Plot histograms of ad selections
+
+## Results
+```
+[Screenshot: Random Selection Histogram]
+[Screenshot: ε-greedy Histogram] 
+[Screenshot: UCB Histogram]
+```
+
+**Expected**: UCB performs best (optimistic exploration), followed by ε-greedy, random worst.
+
+## Sample Output
+```
+Total reward random: ~4000
+Total reward ε-greedy: ~4500  
+Total reward UCB: ~4800
+```
+
+## Conclusion
+UCB algorithm effectively balances exploration-exploitation, achieving highest cumulative reward. Suitable for online ad optimization where click probabilities unknown.
+
+## References
+1. Sutton & Barto, "Reinforcement Learning: An Introduction" Ch. 2
+2. "Reinforcement Learning: An Introduction" - Multi-armed Bandits
+
+## Setup & Run
+```bash
+pip install -r requirements.txt
+jupyter notebook RL_EXP_2.ipynb
+```
+
+---
+
+**Repository Structure**: ✓ Source Code | ✓ Dataset | Results | ✓ Documentation | ✓ Requirements
+
