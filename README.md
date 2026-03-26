@@ -84,7 +84,7 @@ Max Value V*[HighBat-Search] ≈ 2.15 (γ=0.9)
 ## References
 1. Sutton & Barto, "Reinforcement Learning: An Introduction" (Ch. 3 Finite MDPs, Ch. 4 DP)
 2. Puterman, "Markov Decision Processes"  
-3. AIDS Sem6 RL Course Materials
+3. AIDS Sem8 RL Course Materials
 
 ## Setup & Run
 ```bash
