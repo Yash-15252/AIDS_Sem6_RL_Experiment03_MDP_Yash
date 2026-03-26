@@ -1,48 +1,97 @@
-# AIDS_Sem6_RL_Experiment02_KArmedBandit
+# AIDS_Sem6_RL_Experiment03_MDP
 
-## Aim
-To implement and compare different Multi-Armed Bandit algorithms (Random Selection, ε-greedy, UCB) for ad click optimization problem.
-
-## Problem Statement
-An advertising company runs 10 different ads on a webpage. Given click data (1=clicked, 0=not clicked), implement K-armed bandit algorithms to maximize total reward (clicks).
-
-## Brief Theory
-**Multi-Armed Bandit Problem**: Choose actions (arms) to maximize cumulative reward. Balance **exploration** (try new arms) vs **exploitation** (choose best known arm).
-
-- **Random**: Pure exploration, select randomly
-- **ε-greedy**: ε% random (explore), (1-ε)% best so far (exploit)
-- **UCB**: Optimistic upper bound: Q + √(2ln(t)/N)
-
-## Implementation Explanation
-1. Load `Advertising.csv` (10000 users × 10 ads)
-2. **Random**: Select uniformly random ad each time
-3. **ε-greedy**: ε=0.1 probability random, else argmax(Q)
-4. **UCB**: Select arm maximizing Q(a) + √(2ln(N_total)/N(a))
-5. Track selections, rewards, update Q-values
-6. Plot histograms of ad selections
-
-**Expected**: UCB performs best (optimistic exploration), followed by ε-greedy, random worst.
-
-## Sample Output
-```
-Total reward random: ~4000
-Total reward ε-greedy: ~4500  
-Total reward UCB: ~4800
-```
-
-## Conclusion
-UCB algorithm effectively balances exploration-exploitation, achieving highest cumulative reward. Suitable for online ad optimization where click probabilities unknown.
-
-## References
-1. Sutton & Barto, "Reinforcement Learning: An Introduction" Ch. 2
-2. "Reinforcement Learning: An Introduction" - Multi-armed Bandits
-
-## Setup & Run
-```bash
-pip install -r requirements.txt
-jupyter notebook RL_EXP_2.ipynb
-```
+## ***YASH KHAMKAR - 221A030***
+## ***Markov Decision Process (MDP)***
 
 ---
 
+## Aim
+To study and implement Markov Decision Process (MDP) concepts for a recycling robot navigating battery-constrained environment states.
+
+## Problem Statement
+```
+A recycling robot wanders around in environment to collect empty soda cans. 
+It has a purpose to collect soda cans and recycle them in the nearby dustbin. 
+There are some features on which the robot works such as Low battery and High Battery.
+
+1. Low Battery - Search, Wait and Recharge
+2. High Battery - Search and Wait
+```
+
+## Brief Theory
+**Markov Decision Process (MDP)**: Stochastic decision-making framework modeling dynamic systems with sequential decisions under randomness or control. Used in probabilistic planning where agents learn optimal behavior to achieve goals.
+
+**Key Components**:
+- **S**: States (LowBat_Search, LowBat_Wait, LowBat_Recharge, HighBat_Search, HighBat_Wait)
+- **A**: Actions (Search, Wait, Recharge)
+- **P**: State transition probabilities P(s'|s,a)
+- **R**: Rewards R(s,a,s')
+- **γ**: Discount factor
+
+**Solution Algorithms**:
+- **Value Iteration**: V(s) ← max_a Σ [P(s'|s,a)(R(s,a,s') + γV(s'))]. Iterate until convergence
+- **Policy Iteration**: Policy Evaluation + Policy Improvement cycles
+
+## Implementation Explanation
+`RL_EXP_3.ipynb` contains the MDP implementation for recycling robot:
+
+```
+1. Environment Setup:
+   - 5 discrete states based on battery level + task
+   - Action space per state
+   
+2. Value Iteration:
+   - Initialize V(s)=0 for all states
+   - Bellman backup until ||ΔV|| < ε
+   
+3. Policy Iteration:
+   - Evaluate policy: v_π = r_π + γP_π v_π
+   - Improve: π(s) = argmax_a Q^π(s,a)
+   - Converge when π unchanged
+   
+4. Results Visualization:
+   - Optimal policy per state
+   - Value function convergence
+   - Algorithm comparison
+```
+
+**Key Findings**:
+```
+Value Iteration: Converges in ~200 iterations  
+Policy Iteration: ~10 iterations (faster)
+Optimal Policy: HighBat-Search → LowBat-Recharge cycle  
+Demonstrates battery-aware decision making
+```
+
+## Sample Output
+```
+Optimal Policy:
+HighBat-Search: SEARCH
+HighBat-Wait: SEARCH  
+LowBat-Search: RECHARGE
+LowBat-Wait: RECHARGE
+LowBat-Recharge: RECHARGE
+
+Max Value V*[HighBat-Search] ≈ 2.15 (γ=0.9)
+```
+
+## Conclusion
+**Classical MDP solving verified**: Value/Policy Iteration solve finite MDPs optimally  
+**Battery management**: Robot learns to recharge when low, search when high  
+**Algorithm comparison**: PI faster despite evaluation overhead  
+**Foundation for RL**: Dynamic programming methods enable optimal control  
+
+## References
+1. Sutton & Barto, "Reinforcement Learning: An Introduction" (Ch. 3 Finite MDPs, Ch. 4 DP)
+2. Puterman, "Markov Decision Processes"  
+3. AIDS Sem6 RL Course Materials
+
+## Setup & Run
+```bash
+cd AIDS_Sem6_RL_Experiment03_MDP
+pip install -r requirements.txt
+jupyter notebook RL_EXP_3.ipynb
+```
+
+---
 
