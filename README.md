@@ -21,13 +21,6 @@ An advertising company runs 10 different ads on a webpage. Given click data (1=c
 5. Track selections, rewards, update Q-values
 6. Plot histograms of ad selections
 
-## Results
-```
-[Screenshot: Random Selection Histogram]
-[Screenshot: ε-greedy Histogram] 
-[Screenshot: UCB Histogram]
-```
-
 **Expected**: UCB performs best (optimistic exploration), followed by ε-greedy, random worst.
 
 ## Sample Output
@@ -52,5 +45,4 @@ jupyter notebook RL_EXP_2.ipynb
 
 ---
 
-**Repository Structure**: ✓ Source Code | ✓ Dataset | Results | ✓ Documentation | ✓ Requirements
 
